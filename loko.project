@@ -1,0 +1,2048 @@
+{
+  "name": "text_classification_from_mongo_demo",
+  "id": "text_classification_from_mongo_demo",
+  "description": "",
+  "created_on": "06/04/2023, 09:56:42",
+  "last_modify": "07/04/2023, 15:22:16",
+  "graphs": {
+    "main": {
+      "nodes": [
+        {
+          "id": "b5e6ca7b-0487-4f5e-b85f-e0b7f15a5f16",
+          "position": {
+            "x": 523,
+            "y": 107
+          },
+          "type": "custom",
+          "dragHandle": "#nodeHandle",
+          "sourcePosition": "right",
+          "targetPosition": "left",
+          "width": 150,
+          "height": 56,
+          "selected": false,
+          "dragging": false,
+          "data": {
+            "name": "CSV Reader",
+            "events": null,
+            "description": "### Description\nThe CSV READER component allows reading files in csv format. \n\nYou have the possibility to set a separator using the **Separator** parameter. The **Infer types** parameter allows the automatic transformation of the type of non-textual fields.\n\n### Input\nThe input required by this component is the file path in PosixPath format. However, the file path can also be defined when the component is created, in which case no input is required.\n\n### Output\nThe submitted file is returned row by row, where each row is represented by a dictionary that has the column names as keys.",
+            "inputs": [
+              {
+                "id": "input",
+                "label": "input"
+              }
+            ],
+            "outputs": [
+              {
+                "id": "output",
+                "label": "output"
+              }
+            ],
+            "configured": true,
+            "options": {
+              "group": "Inputs",
+              "args": [
+                {
+                  "name": "comment",
+                  "type": "area",
+                  "label": "Node comment",
+                  "helper": "Use it to explain the usage of this node"
+                },
+                {
+                  "name": "alias",
+                  "type": "text",
+                  "label": "Name",
+                  "helper": "Use this name as an alias"
+                },
+                {
+                  "name": "debug",
+                  "type": "boolean",
+                  "label": "Debug to Console",
+                  "divider": true
+                },
+                {
+                  "name": "value",
+                  "type": "files",
+                  "label": "File",
+                  "fragment": "files",
+                  "helper": "choose a file or read input"
+                },
+                {
+                  "name": "separator",
+                  "type": "text",
+                  "label": "Separator"
+                },
+                {
+                  "name": "df",
+                  "type": "boolean",
+                  "label": "Dask Dataframe"
+                },
+                {
+                  "name": "infer_type",
+                  "type": "boolean",
+                  "label": "Infer types"
+                },
+                {
+                  "name": "propagate",
+                  "type": "boolean",
+                  "label": "Flush at the end"
+                }
+              ],
+              "click": "Send file",
+              "icon": "RiFileChart2Fill",
+              "values": {
+                "comment": "",
+                "alias": "Email dataset",
+                "debug": true,
+                "separator": ",",
+                "df": false,
+                "infer_type": false,
+                "propagate": true,
+                "value": {
+                  "name": "email_dataset.csv",
+                  "path": "data/projects/text_classification_from_mongo_demo/data/email_dataset.csv",
+                  "parent": "data/projects/text_classification_from_mongo_demo/data",
+                  "isDir": false,
+                  "hidden": false
+                }
+              }
+            },
+            "locked": null
+          },
+          "selectable": true,
+          "draggable": true,
+          "positionAbsolute": {
+            "x": 523,
+            "y": 107
+          },
+          "__class__": "Node"
+        },
+        {
+          "id": "5d989bf1-7f58-49d8-9fc2-dcdf21eb5fde",
+          "position": {
+            "x": 842,
+            "y": 253
+          },
+          "type": "custom",
+          "dragHandle": "#nodeHandle",
+          "sourcePosition": "right",
+          "targetPosition": "left",
+          "width": 197,
+          "height": 80,
+          "selected": false,
+          "dragging": false,
+          "data": {
+            "pname": "mongo_extension",
+            "name": "MongoDB",
+            "events": null,
+            "description": "",
+            "inputs": [
+              {
+                "id": "insert",
+                "label": "insert",
+                "service": "",
+                "to": "output"
+              },
+              {
+                "id": "query",
+                "label": "query",
+                "service": "query",
+                "to": "query_output"
+              },
+              {
+                "id": "list",
+                "label": "list",
+                "service": "list",
+                "to": "list_output"
+              },
+              {
+                "id": "delete",
+                "label": "delete",
+                "service": "delete",
+                "to": "delete_output"
+              }
+            ],
+            "outputs": [
+              {
+                "id": "output",
+                "label": "output"
+              },
+              {
+                "id": "query_output",
+                "label": "query_output"
+              },
+              {
+                "id": "list_output",
+                "label": "list_output"
+              },
+              {
+                "id": "delete_output",
+                "label": "delete_output"
+              }
+            ],
+            "configured": true,
+            "options": {
+              "group": "Custom",
+              "args": [
+                {
+                  "name": "comment",
+                  "type": "area",
+                  "label": "Node comment",
+                  "helper": "Use it to explain the usage of this node"
+                },
+                {
+                  "name": "alias",
+                  "type": "text",
+                  "label": "Name",
+                  "helper": "Use this name as an alias"
+                },
+                {
+                  "name": "debug",
+                  "type": "boolean",
+                  "label": "Debug to Console",
+                  "divider": true
+                },
+                {
+                  "name": "collection",
+                  "type": "text",
+                  "label": "Collection name",
+                  "helper": "Specify the mongo collection name"
+                },
+                {
+                  "name": "stream",
+                  "type": "boolean",
+                  "label": "Stream or not results",
+                  "helper": "Stream "
+                }
+              ],
+              "click": null,
+              "icon": null,
+              "values": {
+                "comment": "",
+                "alias": "Email collection",
+                "debug": true,
+                "collection": "email",
+                "stream": true
+              }
+            },
+            "locked": null
+          },
+          "selectable": true,
+          "draggable": true,
+          "positionAbsolute": {
+            "x": 842,
+            "y": 253
+          },
+          "__class__": "Node"
+        },
+        {
+          "id": "82844dbf-ac2a-45d1-82d9-48d886d7a425",
+          "position": {
+            "x": 488.32,
+            "y": 72.63999999999999
+          },
+          "type": "comment",
+          "dragHandle": "#commentHandle",
+          "sourcePosition": "right",
+          "targetPosition": "left",
+          "width": 661,
+          "height": 408,
+          "selected": false,
+          "dragging": false,
+          "data": {
+            "comment": "STEP1: Mongo ingestion",
+            "fill": "#577590",
+            "height": 408,
+            "width": 661
+          },
+          "zIndex": -1,
+          "selectable": false,
+          "connectable": false,
+          "positionAbsolute": {
+            "x": 488.32,
+            "y": 72.63999999999999
+          },
+          "__class__": "Node"
+        },
+        {
+          "id": "e02c2a6e-5744-42ec-80db-2228636a793e",
+          "position": {
+            "x": 1195,
+            "y": 621
+          },
+          "type": "custom",
+          "dragHandle": "#nodeHandle",
+          "sourcePosition": "right",
+          "targetPosition": "left",
+          "width": 150,
+          "height": 60,
+          "selected": false,
+          "dragging": false,
+          "data": {
+            "microservice": "predictor",
+            "name": "Predictor",
+            "events": {
+              "type": "predictor",
+              "field": "predictor"
+            },
+            "description": "### Description\nThe PREDICTOR component is one of the most sophisticated in Loko AI, and deals with the training, prediction and evaluation of ML models. \n\nIts configuration and function in the flow are described below to give the user a general understanding of how this can be used.\n\n### Input\nTo transmit the data of the PREDICTOR component as input, you can operate in two ways, choosing to set the parameter **Stream Data** to **True** or **False**.\n\nIn the first case it is possible to pass the samples one at a time: in this way the data will be passed as dictionaries:\n```json\n{\"data\": {\"text\":\"Today is a beautiful day\"}, \"target\": \"class01\"}\n```\n\nIn the second case, ie by setting this parameter as False, the data will be transmitted all at once as a list of dictionaries:\n```json\n{\"data\": [{\"text\":\"Today is a beautiful day\"}, {\"text\":\"Today is a bad day\"}], \"target\": [\"class01\",\"class02\"]}\n```\n\nAnother parameter related to data input is target.\n\nBy setting the name of the target variable, there is no need to split the variables into date and target.\n\nSupposing to read a line of a csv as:\n```json\n{\"text\":\"Today is a beautiful day\", \"label\": \"class01\"}\n```\n\nsetting the target variable to label, the PREDICTOR component will automatically interpret all variables other than the target variable as explanatory and the variable label as the response variable. In this way it is not necessary to divide the data in the two keys before hand data and target.\n\nAs for fit and evaluate of PREDICTOR, it is necessary to supply both the variable data and the variable target.\n\nConversely, as far as concerned Predict is, the target variable is not required.\n\n### Output\nThe output of theservice fit will only provide as response: Job submitted.\n\nThis means that the PREDICTOR training has started correctly. You will be able to check the results obtained through the appropriate dashboard.\n\nAs for the predict, the output is the following:\n```json\n{\"prediction\": \"class01\", \"object\": {\"text\":\"Today is a beautiful day\"}}\n```\n\nFinally, the evaluate has a more complex:\n```json\n{\"tdist\": distribution of the target variable provided\n \"report_test\": metrics used for the evaluation of the model (vary according to the task)\n \"datetime\": date and time\n \"task\": classification or regression\n}\n```",
+            "inputs": [
+              {
+                "id": "fit",
+                "label": "fit",
+                "closed": false
+              },
+              {
+                "id": "predict",
+                "label": "predict"
+              },
+              {
+                "id": "evaluate",
+                "label": "evaluate"
+              }
+            ],
+            "outputs": [
+              {
+                "id": "fit",
+                "label": "fit"
+              },
+              {
+                "id": "predict",
+                "label": "predict"
+              },
+              {
+                "id": "evaluate",
+                "label": "evaluate"
+              }
+            ],
+            "configured": true,
+            "options": {
+              "group": "DS4Biz",
+              "args": [
+                {
+                  "name": "comment",
+                  "type": "area",
+                  "label": "Node comment",
+                  "helper": "Use it to explain the usage of this node"
+                },
+                {
+                  "name": "alias",
+                  "type": "text",
+                  "label": "Name",
+                  "helper": "Use this name as an alias"
+                },
+                {
+                  "name": "debug",
+                  "type": "boolean",
+                  "label": "Debug to Console",
+                  "divider": true
+                },
+                {
+                  "name": "service",
+                  "type": "service",
+                  "label": "Available services",
+                  "fragment": "predictor",
+                  "validation": {
+                    "required": "Required field"
+                  }
+                },
+                {
+                  "name": "predictor",
+                  "type": "dynamic",
+                  "dynamicType": "dependent",
+                  "parent": "service",
+                  "label": "Predictors",
+                  "fragment": "predictors",
+                  "validation": {
+                    "required": "Required field"
+                  }
+                },
+                {
+                  "name": "stream",
+                  "type": "boolean",
+                  "label": "Stream data"
+                },
+                {
+                  "name": "target_y",
+                  "type": "text",
+                  "label": "Target name",
+                  "helper": "Name of the features you want to estimate, if not specified the default feature name is \"target\""
+                },
+                {
+                  "name": "partial_fit",
+                  "type": "boolean",
+                  "label": "Partial fit",
+                  "group": "Fit parameters"
+                },
+                {
+                  "name": "save_dataset",
+                  "type": "select",
+                  "options": [
+                    "yes",
+                    "no"
+                  ],
+                  "label": "Save dataset",
+                  "helper": "save testset to compute the metrics report for partial fit task",
+                  "group": "Fit parameters"
+                },
+                {
+                  "name": "report",
+                  "type": "boolean",
+                  "label": "Compute metrics report",
+                  "group": "Fit parameters"
+                },
+                {
+                  "name": "test_size",
+                  "type": "dynamic",
+                  "dynamicType": "select",
+                  "parent": "report",
+                  "condition": "{parent}===true",
+                  "options": [
+                    0.1,
+                    0.2,
+                    0.3,
+                    0.4,
+                    0.5
+                  ],
+                  "label": "Test size",
+                  "group": "Fit parameters"
+                },
+                {
+                  "name": "cv",
+                  "dynamicType": "select",
+                  "parent": "report",
+                  "condition": "{parent}===true",
+                  "type": "select",
+                  "options": [
+                    0,
+                    2,
+                    3,
+                    4,
+                    5
+                  ],
+                  "label": "Number of folds used for cross-validation",
+                  "group": "Fit parameters"
+                },
+                {
+                  "name": "history_limit",
+                  "type": "select",
+                  "options": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
+                  ],
+                  "label": "Number of models to keep saved",
+                  "group": "Fit parameters"
+                },
+                {
+                  "name": "fit_params",
+                  "type": "area",
+                  "label": "Additional fit parameters",
+                  "group": "Fit parameters"
+                },
+                {
+                  "name": "include_probs",
+                  "type": "boolean",
+                  "label": "Predict proba",
+                  "group": "Predict parameters"
+                },
+                {
+                  "name": "predict_branch",
+                  "type": "select",
+                  "options": [
+                    "development",
+                    "master"
+                  ],
+                  "label": "Branch",
+                  "helper": "fit task automatically saves model on development branch",
+                  "group": "Predict parameters"
+                },
+                {
+                  "name": "limit",
+                  "type": "select",
+                  "options": [
+                    -1,
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
+                  ],
+                  "label": "Limit",
+                  "helper": "set to 0 to evalute only last model, set to -1 to evaluate all models in history",
+                  "group": "Evaluate parameters"
+                },
+                {
+                  "name": "eval_branch",
+                  "type": "select",
+                  "options": [
+                    "development",
+                    "master"
+                  ],
+                  "label": "Branch",
+                  "helper": "fit task automatically saves model on development branch",
+                  "group": "Evaluate parameters"
+                },
+                {
+                  "name": "propagate",
+                  "type": "boolean",
+                  "label": "Flush at the end"
+                }
+              ],
+              "click": null,
+              "icon": "RiTyphoonFill",
+              "values": {
+                "comment": "",
+                "alias": "",
+                "debug": true,
+                "stream": true,
+                "target_y": "label",
+                "propagate": true,
+                "partial_fit": false,
+                "save_dataset": "no",
+                "report": true,
+                "cv": "0",
+                "history_limit": "0",
+                "fit_params": "{}",
+                "include_probs": false,
+                "predict_branch": "development",
+                "limit": "0",
+                "eval_branch": "development",
+                "test_size": "0.2",
+                "service": "predictor",
+                "predictor": "email_clf"
+              }
+            },
+            "disabled": false,
+            "status": "Pipeline END",
+            "locked": null
+          },
+          "selectable": true,
+          "draggable": true,
+          "positionAbsolute": {
+            "x": 1195,
+            "y": 621
+          },
+          "__class__": "Node"
+        },
+        {
+          "id": "120c94b3-bd33-4cc1-be7f-c423ffedde28",
+          "position": {
+            "x": 704,
+            "y": 599
+          },
+          "type": "custom",
+          "dragHandle": "#nodeHandle",
+          "sourcePosition": "right",
+          "targetPosition": "left",
+          "width": 150,
+          "height": 80,
+          "selected": false,
+          "dragging": false,
+          "data": {
+            "pname": "mongo_extension",
+            "name": "MongoDB",
+            "events": null,
+            "description": "",
+            "inputs": [
+              {
+                "id": "insert",
+                "label": "insert",
+                "service": "",
+                "to": "output"
+              },
+              {
+                "id": "query",
+                "label": "query",
+                "service": "query",
+                "to": "query_output"
+              },
+              {
+                "id": "list",
+                "label": "list",
+                "service": "list",
+                "to": "list_output"
+              },
+              {
+                "id": "delete",
+                "label": "delete",
+                "service": "delete",
+                "to": "delete_output"
+              }
+            ],
+            "outputs": [
+              {
+                "id": "output",
+                "label": "output"
+              },
+              {
+                "id": "query_output",
+                "label": "query_output"
+              },
+              {
+                "id": "list_output",
+                "label": "list_output"
+              },
+              {
+                "id": "delete_output",
+                "label": "delete_output"
+              }
+            ],
+            "configured": true,
+            "options": {
+              "group": "Custom",
+              "args": [
+                {
+                  "name": "comment",
+                  "type": "area",
+                  "label": "Node comment",
+                  "helper": "Use it to explain the usage of this node"
+                },
+                {
+                  "name": "alias",
+                  "type": "text",
+                  "label": "Name",
+                  "helper": "Use this name as an alias"
+                },
+                {
+                  "name": "debug",
+                  "type": "boolean",
+                  "label": "Debug to Console",
+                  "divider": true
+                },
+                {
+                  "name": "collection",
+                  "type": "text",
+                  "label": "Collection name",
+                  "helper": "Specify the mongo collection name"
+                },
+                {
+                  "name": "stream",
+                  "type": "boolean",
+                  "label": "Stream or not results",
+                  "helper": "Stream "
+                }
+              ],
+              "click": null,
+              "icon": null,
+              "values": {
+                "comment": "",
+                "alias": "Email collection",
+                "debug": false,
+                "collection": "email",
+                "stream": true
+              }
+            },
+            "locked": null
+          },
+          "selectable": true,
+          "draggable": true,
+          "positionAbsolute": {
+            "x": 704,
+            "y": 599
+          },
+          "__class__": "Node"
+        },
+        {
+          "id": "50fb9c65-fd8c-433b-a611-d6892cddca96",
+          "position": {
+            "x": 478,
+            "y": 651
+          },
+          "type": "custom",
+          "dragHandle": "#nodeHandle",
+          "sourcePosition": "right",
+          "targetPosition": "left",
+          "width": 150,
+          "height": 88,
+          "selected": false,
+          "dragging": false,
+          "data": {
+            "name": "Trigger",
+            "events": null,
+            "description": "### Description\nThe TRIGGER component is used to start streams.\n\n### Output\nThe parameter Type can be set as a **String** or an **Object**. The parameter Value, on the other hand, defines the actual output of the component.",
+            "inputs": [],
+            "outputs": [
+              {
+                "id": "output",
+                "label": "output"
+              }
+            ],
+            "configured": true,
+            "options": {
+              "group": "Common",
+              "args": [
+                {
+                  "name": "comment",
+                  "type": "area",
+                  "label": "Node comment",
+                  "helper": "Use it to explain the usage of this node"
+                },
+                {
+                  "name": "alias",
+                  "type": "text",
+                  "label": "Name",
+                  "helper": "Use this name as an alias"
+                },
+                {
+                  "name": "debug",
+                  "type": "boolean",
+                  "label": "Debug to Console",
+                  "divider": true
+                },
+                {
+                  "name": "type",
+                  "type": "select",
+                  "description": "The type of data",
+                  "label": "Type",
+                  "validation": {
+                    "required": "Required field"
+                  },
+                  "fragment": null,
+                  "advanced": false,
+                  "options": [
+                    "String",
+                    "Object"
+                  ],
+                  "value": null
+                },
+                {
+                  "name": "value",
+                  "type": "dynamic",
+                  "dynamicType": {
+                    "String": "area",
+                    "Object": "code"
+                  },
+                  "parent": "type",
+                  "label": "Value",
+                  "validation": {
+                    "required": "Required field"
+                  }
+                }
+              ],
+              "click": "Send message",
+              "icon": "RiPlayFill",
+              "values": {
+                "comment": "",
+                "alias": "",
+                "debug": false,
+                "type": "Object",
+                "value": "{}"
+              }
+            },
+            "locked": null
+          },
+          "selectable": true,
+          "draggable": true,
+          "positionAbsolute": {
+            "x": 478,
+            "y": 651
+          },
+          "__class__": "Node"
+        },
+        {
+          "id": "bea30044-d539-4458-b922-f8bda6750c59",
+          "position": {
+            "x": 977,
+            "y": 652
+          },
+          "type": "custom",
+          "dragHandle": "#nodeHandle",
+          "sourcePosition": "right",
+          "targetPosition": "left",
+          "width": 150,
+          "height": 56,
+          "selected": false,
+          "dragging": false,
+          "data": {
+            "name": "Selector",
+            "events": null,
+            "description": "### Description\nThe SELECTOR component is used to select the value of one or more object keys. The required key/s are defined using the parameter **Keys**.\n\nIn order to add other keys you need to click on the **\"Add field\"** button.\n\nIf the field **Ignore Error** is toggled, missing keys are ignored.\n\nIt's also possible to select nested key, just by writing them in a *key* field, and seperating them using a full stop. Let's consider the object in the example below: if you want to have access to the content of the \"key3\" object, you need to use the following notation \"key1.key2.key3\".\n\n\n```json\n {\"key1\":{\"key2\":{\"key3\":[\"val1\", \"val2\", \"val3\"]}}} \n```\n\n\n\n### Input\n\nThe input consists of a dictionary.\n\n\n\n### Output\n\nThe output is the value of the required key of the dictionary received as input, if only one key is selected; otherwise it's an object which contains the keys specified and their value.\n",
+            "inputs": [
+              {
+                "id": "input",
+                "label": "input"
+              }
+            ],
+            "outputs": [
+              {
+                "id": "output",
+                "label": "output"
+              }
+            ],
+            "configured": true,
+            "options": {
+              "group": "Common",
+              "args": [
+                {
+                  "name": "comment",
+                  "type": "area",
+                  "label": "Node comment",
+                  "helper": "Use it to explain the usage of this node"
+                },
+                {
+                  "name": "alias",
+                  "type": "text",
+                  "label": "Name",
+                  "helper": "Use this name as an alias"
+                },
+                {
+                  "name": "debug",
+                  "type": "boolean",
+                  "label": "Debug to Console",
+                  "divider": true
+                },
+                {
+                  "name": "ignore_err",
+                  "label": "Ignor Error",
+                  "type": "boolean",
+                  "description": "Choose whether to ignore error in case of a missing key or not"
+                },
+                {
+                  "name": "exclude",
+                  "label": "Exclude Keys",
+                  "type": "boolean",
+                  "description": "If enabled, the output contains the whole input object excluding the specified keys; otherwise, only the specified keys are returned"
+                },
+                {
+                  "name": "keys",
+                  "label": "Keys",
+                  "type": "multiKeyValue",
+                  "validation": {
+                    "required": "Required field"
+                  },
+                  "description": "Name of the key/s to select from the incoming message",
+                  "fields": [
+                    {
+                      "name": "k",
+                      "placeholder": "key",
+                      "validation": {
+                        "required": "Required field"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "click": null,
+              "icon": "RiCursorFill",
+              "values": {
+                "comment": "",
+                "alias": "",
+                "debug": true,
+                "ignore_err": false,
+                "exclude": false,
+                "keys": [
+                  {
+                    "k": "label",
+                    "id": "a6a6f24c-0e59-4779-9c59-c4f0e3841246"
+                  },
+                  {
+                    "k": "text",
+                    "id": "c46b024c-6bd6-4b04-9e27-6476eb5c9b44"
+                  }
+                ]
+              }
+            },
+            "locked": null
+          },
+          "selectable": true,
+          "draggable": true,
+          "positionAbsolute": {
+            "x": 977,
+            "y": 652
+          },
+          "__class__": "Node"
+        },
+        {
+          "id": "bef8853b-4d93-4674-8186-73bdd3e6cb12",
+          "position": {
+            "x": 534,
+            "y": 356
+          },
+          "type": "custom",
+          "dragHandle": "#nodeHandle",
+          "sourcePosition": "right",
+          "targetPosition": "left",
+          "width": 150,
+          "height": 104,
+          "selected": false,
+          "dragging": false,
+          "data": {
+            "name": "Trigger",
+            "events": null,
+            "description": "### Description\nThe TRIGGER component is used to start streams.\n\n### Output\nThe parameter Type can be set as a **String** or an **Object**. The parameter Value, on the other hand, defines the actual output of the component.",
+            "inputs": [],
+            "outputs": [
+              {
+                "id": "output",
+                "label": "output"
+              }
+            ],
+            "configured": true,
+            "options": {
+              "group": "Common",
+              "args": [
+                {
+                  "name": "comment",
+                  "type": "area",
+                  "label": "Node comment",
+                  "helper": "Use it to explain the usage of this node"
+                },
+                {
+                  "name": "alias",
+                  "type": "text",
+                  "label": "Name",
+                  "helper": "Use this name as an alias"
+                },
+                {
+                  "name": "debug",
+                  "type": "boolean",
+                  "label": "Debug to Console",
+                  "divider": true
+                },
+                {
+                  "name": "type",
+                  "type": "select",
+                  "description": "The type of data",
+                  "label": "Type",
+                  "validation": {
+                    "required": "Required field"
+                  },
+                  "fragment": null,
+                  "advanced": false,
+                  "options": [
+                    "String",
+                    "Object"
+                  ],
+                  "value": null
+                },
+                {
+                  "name": "value",
+                  "type": "dynamic",
+                  "dynamicType": {
+                    "String": "area",
+                    "Object": "code"
+                  },
+                  "parent": "type",
+                  "label": "Value",
+                  "validation": {
+                    "required": "Required field"
+                  }
+                }
+              ],
+              "click": "Send message",
+              "icon": "RiPlayFill",
+              "values": {
+                "comment": "",
+                "alias": "Delete data",
+                "debug": false,
+                "type": "Object",
+                "value": "{}"
+              }
+            },
+            "locked": null
+          },
+          "selectable": true,
+          "draggable": true,
+          "positionAbsolute": {
+            "x": 534,
+            "y": 356
+          },
+          "__class__": "Node"
+        },
+        {
+          "id": "8c78a7c7-80b9-4258-a142-e3c5aa41397c",
+          "position": {
+            "x": 446,
+            "y": 516
+          },
+          "type": "comment",
+          "dragHandle": "#commentHandle",
+          "sourcePosition": "right",
+          "targetPosition": "left",
+          "width": 940,
+          "height": 276,
+          "selected": false,
+          "dragging": false,
+          "data": {
+            "comment": "STEP2: Model training",
+            "fill": "#577590",
+            "height": 276,
+            "width": 940
+          },
+          "zIndex": -1,
+          "selectable": false,
+          "connectable": false,
+          "__class__": "Node"
+        },
+        {
+          "id": "b464ec26-a264-4575-a335-f1676eb8175b",
+          "position": {
+            "x": 500,
+            "y": 955
+          },
+          "type": "custom",
+          "dragHandle": "#nodeHandle",
+          "sourcePosition": "right",
+          "targetPosition": "left",
+          "width": 150,
+          "height": 56,
+          "selected": false,
+          "dragging": false,
+          "data": {
+            "name": "Route",
+            "events": null,
+            "description": "### Description\nThe ROUTE component is used to create a web server listening on a specific address and a specific HTTP method.\n\n### Input\nThe component has no input.\n\n### Output\nIn this case there is no fixed output format.",
+            "inputs": [],
+            "outputs": [
+              {
+                "id": "output",
+                "label": "output"
+              }
+            ],
+            "configured": true,
+            "options": {
+              "group": "HTTP",
+              "args": [
+                {
+                  "name": "comment",
+                  "type": "area",
+                  "label": "Node comment",
+                  "helper": "Use it to explain the usage of this node"
+                },
+                {
+                  "name": "alias",
+                  "type": "text",
+                  "label": "Name",
+                  "helper": "Use this name as an alias"
+                },
+                {
+                  "name": "debug",
+                  "type": "boolean",
+                  "label": "Debug to Console",
+                  "divider": true
+                },
+                {
+                  "name": "path",
+                  "type": "path",
+                  "helper": "Insert a path without '/' at start"
+                }
+              ],
+              "click": null,
+              "icon": "RiCloudyFill",
+              "values": {
+                "comment": "",
+                "alias": "",
+                "debug": false,
+                "path": "predict"
+              }
+            },
+            "locked": null
+          },
+          "selectable": true,
+          "draggable": true,
+          "positionAbsolute": {
+            "x": 500,
+            "y": 955
+          },
+          "__class__": "Node"
+        },
+        {
+          "id": "e5ead383-59fd-4491-bb41-dcbbbd14e540",
+          "position": {
+            "x": 960,
+            "y": 939
+          },
+          "type": "custom",
+          "dragHandle": "#nodeHandle",
+          "sourcePosition": "right",
+          "targetPosition": "left",
+          "width": 150,
+          "height": 60,
+          "selected": false,
+          "dragging": false,
+          "data": {
+            "microservice": "predictor",
+            "name": "Predictor",
+            "events": {
+              "type": "predictor",
+              "field": "predictor"
+            },
+            "description": "### Description\nThe PREDICTOR component is one of the most sophisticated in Loko AI, and deals with the training, prediction and evaluation of ML models. \n\nIts configuration and function in the flow are described below to give the user a general understanding of how this can be used.\n\n### Input\nTo transmit the data of the PREDICTOR component as input, you can operate in two ways, choosing to set the parameter **Stream Data** to **True** or **False**.\n\nIn the first case it is possible to pass the samples one at a time: in this way the data will be passed as dictionaries:\n```json\n{\"data\": {\"text\":\"Today is a beautiful day\"}, \"target\": \"class01\"}\n```\n\nIn the second case, ie by setting this parameter as False, the data will be transmitted all at once as a list of dictionaries:\n```json\n{\"data\": [{\"text\":\"Today is a beautiful day\"}, {\"text\":\"Today is a bad day\"}], \"target\": [\"class01\",\"class02\"]}\n```\n\nAnother parameter related to data input is target.\n\nBy setting the name of the target variable, there is no need to split the variables into date and target.\n\nSupposing to read a line of a csv as:\n```json\n{\"text\":\"Today is a beautiful day\", \"label\": \"class01\"}\n```\n\nsetting the target variable to label, the PREDICTOR component will automatically interpret all variables other than the target variable as explanatory and the variable label as the response variable. In this way it is not necessary to divide the data in the two keys before hand data and target.\n\nAs for fit and evaluate of PREDICTOR, it is necessary to supply both the variable data and the variable target.\n\nConversely, as far as concerned Predict is, the target variable is not required.\n\n### Output\nThe output of theservice fit will only provide as response: Job submitted.\n\nThis means that the PREDICTOR training has started correctly. You will be able to check the results obtained through the appropriate dashboard.\n\nAs for the predict, the output is the following:\n```json\n{\"prediction\": \"class01\", \"object\": {\"text\":\"Today is a beautiful day\"}}\n```\n\nFinally, the evaluate has a more complex:\n```json\n{\"tdist\": distribution of the target variable provided\n \"report_test\": metrics used for the evaluation of the model (vary according to the task)\n \"datetime\": date and time\n \"task\": classification or regression\n}\n```",
+            "inputs": [
+              {
+                "id": "fit",
+                "label": "fit"
+              },
+              {
+                "id": "predict",
+                "label": "predict"
+              },
+              {
+                "id": "evaluate",
+                "label": "evaluate"
+              }
+            ],
+            "outputs": [
+              {
+                "id": "fit",
+                "label": "fit"
+              },
+              {
+                "id": "predict",
+                "label": "predict"
+              },
+              {
+                "id": "evaluate",
+                "label": "evaluate"
+              }
+            ],
+            "configured": true,
+            "options": {
+              "group": "DS4Biz",
+              "args": [
+                {
+                  "name": "comment",
+                  "type": "area",
+                  "label": "Node comment",
+                  "helper": "Use it to explain the usage of this node"
+                },
+                {
+                  "name": "alias",
+                  "type": "text",
+                  "label": "Name",
+                  "helper": "Use this name as an alias"
+                },
+                {
+                  "name": "debug",
+                  "type": "boolean",
+                  "label": "Debug to Console",
+                  "divider": true
+                },
+                {
+                  "name": "service",
+                  "type": "service",
+                  "label": "Available services",
+                  "fragment": "predictor",
+                  "validation": {
+                    "required": "Required field"
+                  }
+                },
+                {
+                  "name": "predictor",
+                  "type": "dynamic",
+                  "dynamicType": "dependent",
+                  "parent": "service",
+                  "label": "Predictors",
+                  "fragment": "predictors",
+                  "validation": {
+                    "required": "Required field"
+                  }
+                },
+                {
+                  "name": "stream",
+                  "type": "boolean",
+                  "label": "Stream data"
+                },
+                {
+                  "name": "target_y",
+                  "type": "text",
+                  "label": "Target name",
+                  "helper": "Name of the features you want to estimate, if not specified the default feature name is \"target\""
+                },
+                {
+                  "name": "partial_fit",
+                  "type": "boolean",
+                  "label": "Partial fit",
+                  "group": "Fit parameters"
+                },
+                {
+                  "name": "save_dataset",
+                  "type": "select",
+                  "options": [
+                    "yes",
+                    "no"
+                  ],
+                  "label": "Save dataset",
+                  "helper": "save testset to compute the metrics report for partial fit task",
+                  "group": "Fit parameters"
+                },
+                {
+                  "name": "report",
+                  "type": "boolean",
+                  "label": "Compute metrics report",
+                  "group": "Fit parameters"
+                },
+                {
+                  "name": "test_size",
+                  "type": "dynamic",
+                  "dynamicType": "select",
+                  "parent": "report",
+                  "condition": "{parent}===true",
+                  "options": [
+                    0.1,
+                    0.2,
+                    0.3,
+                    0.4,
+                    0.5
+                  ],
+                  "label": "Test size",
+                  "group": "Fit parameters"
+                },
+                {
+                  "name": "cv",
+                  "dynamicType": "select",
+                  "parent": "report",
+                  "condition": "{parent}===true",
+                  "type": "select",
+                  "options": [
+                    0,
+                    2,
+                    3,
+                    4,
+                    5
+                  ],
+                  "label": "Number of folds used for cross-validation",
+                  "group": "Fit parameters"
+                },
+                {
+                  "name": "history_limit",
+                  "type": "select",
+                  "options": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
+                  ],
+                  "label": "Number of models to keep saved",
+                  "group": "Fit parameters"
+                },
+                {
+                  "name": "fit_params",
+                  "type": "area",
+                  "label": "Additional fit parameters",
+                  "group": "Fit parameters"
+                },
+                {
+                  "name": "include_probs",
+                  "type": "boolean",
+                  "label": "Predict proba",
+                  "group": "Predict parameters"
+                },
+                {
+                  "name": "predict_branch",
+                  "type": "select",
+                  "options": [
+                    "development",
+                    "master"
+                  ],
+                  "label": "Branch",
+                  "helper": "fit task automatically saves model on development branch",
+                  "group": "Predict parameters"
+                },
+                {
+                  "name": "limit",
+                  "type": "select",
+                  "options": [
+                    -1,
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
+                  ],
+                  "label": "Limit",
+                  "helper": "set to 0 to evalute only last model, set to -1 to evaluate all models in history",
+                  "group": "Evaluate parameters"
+                },
+                {
+                  "name": "eval_branch",
+                  "type": "select",
+                  "options": [
+                    "development",
+                    "master"
+                  ],
+                  "label": "Branch",
+                  "helper": "fit task automatically saves model on development branch",
+                  "group": "Evaluate parameters"
+                },
+                {
+                  "name": "propagate",
+                  "type": "boolean",
+                  "label": "Flush at the end"
+                }
+              ],
+              "click": null,
+              "icon": "RiTyphoonFill",
+              "values": {
+                "comment": "",
+                "alias": "",
+                "debug": false,
+                "stream": false,
+                "target_y": "",
+                "propagate": true,
+                "partial_fit": false,
+                "save_dataset": "no",
+                "report": true,
+                "cv": "0",
+                "history_limit": "0",
+                "fit_params": "{}",
+                "include_probs": false,
+                "predict_branch": "development",
+                "limit": "0",
+                "eval_branch": "development",
+                "test_size": "0.2",
+                "service": "predictor",
+                "predictor": "email_clf"
+              }
+            },
+            "disabled": false,
+            "locked": null,
+            "status": "Pipeline END"
+          },
+          "selectable": true,
+          "draggable": true,
+          "positionAbsolute": {
+            "x": 960,
+            "y": 939
+          },
+          "__class__": "Node"
+        },
+        {
+          "id": "e68b2b65-c3c6-425d-9864-c5c897e4ab56",
+          "position": {
+            "x": 1182,
+            "y": 978
+          },
+          "type": "custom",
+          "dragHandle": "#nodeHandle",
+          "sourcePosition": "right",
+          "targetPosition": "left",
+          "width": 150,
+          "height": 56,
+          "selected": false,
+          "dragging": false,
+          "data": {
+            "name": "Response",
+            "events": null,
+            "description": "### Description\nThe RESPONSE component is used to set the type of response output that should be sent upon receipt of an HTTP request captured by a **Route** component.\n\n### Input\nIn this case there is no fixed input format.\n\n### Output\nThe component has no output.",
+            "inputs": [
+              {
+                "id": "input",
+                "label": "input"
+              }
+            ],
+            "outputs": [],
+            "configured": true,
+            "options": {
+              "group": "HTTP",
+              "args": [
+                {
+                  "name": "comment",
+                  "type": "area",
+                  "label": "Node comment",
+                  "helper": "Use it to explain the usage of this node"
+                },
+                {
+                  "name": "alias",
+                  "type": "text",
+                  "label": "Name",
+                  "helper": "Use this name as an alias"
+                },
+                {
+                  "name": "debug",
+                  "type": "boolean",
+                  "label": "Debug to Console",
+                  "divider": true
+                },
+                {
+                  "name": "type",
+                  "type": "select",
+                  "options": [
+                    "html",
+                    "json"
+                  ],
+                  "label": "Response Type",
+                  "validation": {
+                    "required": "Required field"
+                  }
+                }
+              ],
+              "click": null,
+              "icon": "RiDownloadCloud2Fill",
+              "values": {
+                "comment": "",
+                "alias": "",
+                "debug": false,
+                "type": "json"
+              }
+            },
+            "locked": null
+          },
+          "selectable": true,
+          "draggable": true,
+          "positionAbsolute": {
+            "x": 1182,
+            "y": 978
+          },
+          "__class__": "Node"
+        },
+        {
+          "id": "aa496623-3d8b-408c-b731-2b41b645246a",
+          "position": {
+            "x": 800,
+            "y": 1240
+          },
+          "type": "custom",
+          "dragHandle": "#nodeHandle",
+          "sourcePosition": "right",
+          "targetPosition": "left",
+          "width": 150,
+          "height": 56,
+          "selected": false,
+          "dragging": false,
+          "data": {
+            "name": "HTTP Request",
+            "events": null,
+            "description": "### Description\nThe HTTP REQUEST component is used to make HTTP requests in the web to microservices external to the LOKO AI platform.\n\n### Input\nInput is only required for HTTP methods that have or require a body (PUT/PATCH/POST). In this case there is no predefined input format.\n\n### Output\nIn this case there is no fixed output format.",
+            "inputs": [
+              {
+                "id": "input",
+                "label": "input"
+              }
+            ],
+            "outputs": [
+              {
+                "id": "output",
+                "label": "output"
+              }
+            ],
+            "configured": true,
+            "options": {
+              "group": "HTTP",
+              "args": [
+                {
+                  "name": "comment",
+                  "type": "area",
+                  "label": "Node comment",
+                  "helper": "Use it to explain the usage of this node"
+                },
+                {
+                  "name": "alias",
+                  "type": "text",
+                  "label": "Name",
+                  "helper": "Use this name as an alias"
+                },
+                {
+                  "name": "debug",
+                  "type": "boolean",
+                  "label": "Debug to Console",
+                  "divider": true
+                },
+                {
+                  "type": "text",
+                  "name": "url",
+                  "label": "URL",
+                  "validation": {
+                    "required": "Required field"
+                  }
+                },
+                {
+                  "name": "method",
+                  "label": "Method",
+                  "type": "select",
+                  "options": [
+                    "GET",
+                    "POST",
+                    "PUT",
+                    "DELETE",
+                    "PATCH"
+                  ],
+                  "validation": {
+                    "required": "Required field"
+                  }
+                },
+                {
+                  "name": "accept",
+                  "label": "Accept",
+                  "type": "select",
+                  "options": [
+                    "text",
+                    "json",
+                    "file"
+                  ],
+                  "validation": {
+                    "required": "Required field"
+                  }
+                },
+                {
+                  "name": "query",
+                  "label": "Query params",
+                  "type": "multiKeyValue",
+                  "fields": [
+                    {
+                      "name": "key",
+                      "placeholder": "Key",
+                      "validation": {
+                        "required": "Required field"
+                      }
+                    },
+                    {
+                      "name": "value",
+                      "placeholder": "Value",
+                      "validation": {
+                        "required": "Required field"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "click": "Launch request",
+              "icon": "RiUploadCloud2Fill",
+              "values": {
+                "comment": "",
+                "alias": "",
+                "debug": true,
+                "url": "http://gateway:8080/routes/orchestrator/endpoints/text_classification_from_mongo_demo/predict",
+                "method": "POST",
+                "accept": "json"
+              }
+            },
+            "locked": null
+          },
+          "selectable": true,
+          "draggable": true,
+          "positionAbsolute": {
+            "x": 800,
+            "y": 1240
+          },
+          "__class__": "Node"
+        },
+        {
+          "id": "45fa0a1d-755f-4460-bcb0-348ec5834294",
+          "position": {
+            "x": 742,
+            "y": 995
+          },
+          "type": "custom",
+          "dragHandle": "#nodeHandle",
+          "sourcePosition": "right",
+          "targetPosition": "left",
+          "width": 150,
+          "height": 56,
+          "selected": false,
+          "dragging": false,
+          "data": {
+            "name": "Function",
+            "events": null,
+            "description": "### Description\nThe FUNCTION component is used to apply Python code to the input component's. The input can be retrieved using the variable *data*.\n\nTo be able to use data from components of type FUNCTION that are not linked together, the object is set repository.\n\n```python\nrepository.set('value', 5) - this sets the variable value to 5.\nrepository.get('value') - in this way the variable is called value and the value 5 is returned.\n```\n\n### Input\nThe input is used by the component using the variable **data**.\n\n### Output\nThe output coincides with the return of the code defined when the component was created.",
+            "inputs": [
+              {
+                "id": "input",
+                "label": "input"
+              }
+            ],
+            "outputs": [
+              {
+                "id": "output",
+                "label": "output"
+              }
+            ],
+            "configured": true,
+            "options": {
+              "group": "Common",
+              "args": [
+                {
+                  "name": "comment",
+                  "type": "area",
+                  "label": "Node comment",
+                  "helper": "Use it to explain the usage of this node"
+                },
+                {
+                  "name": "alias",
+                  "type": "text",
+                  "label": "Name",
+                  "helper": "Use this name as an alias"
+                },
+                {
+                  "name": "debug",
+                  "type": "boolean",
+                  "label": "Debug to Console",
+                  "divider": true
+                },
+                {
+                  "name": "propagate",
+                  "type": "boolean",
+                  "label": "Flush at the end"
+                },
+                {
+                  "name": "notify_warnings",
+                  "type": "boolean",
+                  "label": "Notify warnings"
+                },
+                {
+                  "name": "code",
+                  "type": "code",
+                  "description": "A python function that processes the incoming message. \nVariables available are:\n- **data**: the incoming message\n",
+                  "label": "Code",
+                  "validation": {
+                    "required": "Required field"
+                  },
+                  "fragment": null,
+                  "advanced": false,
+                  "options": null,
+                  "value": null
+                }
+              ],
+              "click": null,
+              "icon": "RiCodeSSlashFill",
+              "values": {
+                "comment": "",
+                "alias": "",
+                "debug": false,
+                "propagate": true,
+                "notify_warnings": true,
+                "code": "return dict(text=data.json)"
+              }
+            },
+            "locked": null
+          },
+          "selectable": true,
+          "draggable": true,
+          "positionAbsolute": {
+            "x": 742,
+            "y": 995
+          },
+          "__class__": "Node"
+        },
+        {
+          "id": "3ead0746-3285-4cba-8fa9-f6961360037a",
+          "position": {
+            "x": 554,
+            "y": 1271
+          },
+          "type": "custom",
+          "dragHandle": "#nodeHandle",
+          "sourcePosition": "right",
+          "targetPosition": "left",
+          "width": 150,
+          "height": 56,
+          "selected": false,
+          "dragging": false,
+          "data": {
+            "name": "Trigger",
+            "events": null,
+            "description": "### Description\nThe TRIGGER component is used to start streams.\n\n### Output\nThe parameter Type can be set as a **String** or an **Object**. The parameter Value, on the other hand, defines the actual output of the component.",
+            "inputs": [],
+            "outputs": [
+              {
+                "id": "output",
+                "label": "output"
+              }
+            ],
+            "configured": true,
+            "options": {
+              "group": "Common",
+              "args": [
+                {
+                  "name": "comment",
+                  "type": "area",
+                  "label": "Node comment",
+                  "helper": "Use it to explain the usage of this node"
+                },
+                {
+                  "name": "alias",
+                  "type": "text",
+                  "label": "Name",
+                  "helper": "Use this name as an alias"
+                },
+                {
+                  "name": "debug",
+                  "type": "boolean",
+                  "label": "Debug to Console",
+                  "divider": true
+                },
+                {
+                  "name": "type",
+                  "type": "select",
+                  "description": "The type of data",
+                  "label": "Type",
+                  "validation": {
+                    "required": "Required field"
+                  },
+                  "fragment": null,
+                  "advanced": false,
+                  "options": [
+                    "String",
+                    "Object"
+                  ],
+                  "value": null
+                },
+                {
+                  "name": "value",
+                  "type": "dynamic",
+                  "dynamicType": {
+                    "String": "area",
+                    "Object": "code"
+                  },
+                  "parent": "type",
+                  "label": "Value",
+                  "validation": {
+                    "required": "Required field"
+                  }
+                }
+              ],
+              "click": "Send message",
+              "icon": "RiPlayFill",
+              "values": {
+                "comment": "",
+                "alias": "",
+                "debug": false,
+                "type": "String",
+                "value": "prova di un testo di email"
+              }
+            },
+            "locked": null
+          },
+          "selectable": true,
+          "draggable": true,
+          "positionAbsolute": {
+            "x": 554,
+            "y": 1271
+          },
+          "__class__": "Node"
+        },
+        {
+          "id": "8efd17d1-02a0-4dd2-9bf4-71b0471f7ad0",
+          "position": {
+            "x": 452,
+            "y": 853
+          },
+          "type": "comment",
+          "dragHandle": "#commentHandle",
+          "sourcePosition": "right",
+          "targetPosition": "left",
+          "width": 923,
+          "height": 252,
+          "selected": false,
+          "dragging": false,
+          "data": {
+            "comment": "STEP3: Expose service",
+            "fill": "#577590",
+            "height": 252,
+            "width": 923
+          },
+          "zIndex": -1,
+          "selectable": false,
+          "connectable": false,
+          "positionAbsolute": {
+            "x": 452,
+            "y": 853
+          },
+          "__class__": "Node"
+        },
+        {
+          "id": "d12f7f32-73e5-4d01-a1c4-2aeb0bf19c77",
+          "position": {
+            "x": 495,
+            "y": 1178
+          },
+          "type": "comment",
+          "dragHandle": "#commentHandle",
+          "sourcePosition": "right",
+          "targetPosition": "left",
+          "width": 566,
+          "height": 258,
+          "selected": false,
+          "dragging": false,
+          "data": {
+            "comment": "STEP4: Test service",
+            "fill": "#F74B65",
+            "height": 258,
+            "width": 566
+          },
+          "zIndex": -1,
+          "selectable": false,
+          "connectable": false,
+          "positionAbsolute": {
+            "x": 495,
+            "y": 1178
+          },
+          "__class__": "Node"
+        },
+        {
+          "id": "ffd9c8ee-39c6-4a45-b5a5-26728e085672",
+          "position": {
+            "x": 536,
+            "y": 240
+          },
+          "type": "custom",
+          "dragHandle": "#nodeHandle",
+          "sourcePosition": "right",
+          "targetPosition": "left",
+          "width": 150,
+          "height": 88,
+          "selected": false,
+          "dragging": false,
+          "data": {
+            "name": "Trigger",
+            "events": null,
+            "description": "### Description\nThe TRIGGER component is used to start streams.\n\n### Output\nThe parameter Type can be set as a **String** or an **Object**. The parameter Value, on the other hand, defines the actual output of the component.",
+            "inputs": [],
+            "outputs": [
+              {
+                "id": "output",
+                "label": "output"
+              }
+            ],
+            "configured": true,
+            "options": {
+              "group": "Common",
+              "args": [
+                {
+                  "name": "comment",
+                  "type": "area",
+                  "label": "Node comment",
+                  "helper": "Use it to explain the usage of this node"
+                },
+                {
+                  "name": "alias",
+                  "type": "text",
+                  "label": "Name",
+                  "helper": "Use this name as an alias"
+                },
+                {
+                  "name": "debug",
+                  "type": "boolean",
+                  "label": "Debug to Console",
+                  "divider": true
+                },
+                {
+                  "name": "type",
+                  "type": "select",
+                  "description": "The type of data",
+                  "label": "Type",
+                  "validation": {
+                    "required": "Required field"
+                  },
+                  "fragment": null,
+                  "advanced": false,
+                  "options": [
+                    "String",
+                    "Object"
+                  ],
+                  "value": null
+                },
+                {
+                  "name": "value",
+                  "type": "dynamic",
+                  "dynamicType": {
+                    "String": "area",
+                    "Object": "code"
+                  },
+                  "parent": "type",
+                  "label": "Value",
+                  "validation": {
+                    "required": "Required field"
+                  }
+                }
+              ],
+              "click": "Send message",
+              "icon": "RiPlayFill",
+              "values": {
+                "comment": "",
+                "alias": "List",
+                "debug": false,
+                "type": "String",
+                "value": "Hello world!"
+              }
+            },
+            "locked": null
+          },
+          "selectable": true,
+          "draggable": true,
+          "positionAbsolute": {
+            "x": 536,
+            "y": 240
+          },
+          "__class__": "Node"
+        }
+      ],
+      "edges": [
+        {
+          "id": "reactflow__edge-b5e6ca7b-0487-4f5e-b85f-e0b7f15a5f16output-5d989bf1-7f58-49d8-9fc2-dcdf21eb5fdeinsert",
+          "source": "b5e6ca7b-0487-4f5e-b85f-e0b7f15a5f16",
+          "sourceHandle": "output",
+          "target": "5d989bf1-7f58-49d8-9fc2-dcdf21eb5fde",
+          "targetHandle": "insert",
+          "data": {
+            "startColor": "#F8637A",
+            "stopColor": "#888"
+          },
+          "selected": false,
+          "dragging": false,
+          "__class__": "Edge"
+        },
+        {
+          "id": "reactflow__edge-50fb9c65-fd8c-433b-a611-d6892cddca96output-120c94b3-bd33-4cc1-be7f-c423ffedde28query",
+          "source": "50fb9c65-fd8c-433b-a611-d6892cddca96",
+          "sourceHandle": "output",
+          "target": "120c94b3-bd33-4cc1-be7f-c423ffedde28",
+          "targetHandle": "query",
+          "data": {
+            "startColor": "#D770AD",
+            "stopColor": "#888"
+          },
+          "selected": false,
+          "dragging": false,
+          "__class__": "Edge"
+        },
+        {
+          "id": "reactflow__edge-120c94b3-bd33-4cc1-be7f-c423ffedde28query_output-bea30044-d539-4458-b922-f8bda6750c59input",
+          "source": "120c94b3-bd33-4cc1-be7f-c423ffedde28",
+          "sourceHandle": "query_output",
+          "target": "bea30044-d539-4458-b922-f8bda6750c59",
+          "targetHandle": "input",
+          "data": {
+            "startColor": "#888",
+            "stopColor": "#D770AD"
+          },
+          "selected": false,
+          "dragging": false,
+          "__class__": "Edge"
+        },
+        {
+          "id": "reactflow__edge-bea30044-d539-4458-b922-f8bda6750c59output-e02c2a6e-5744-42ec-80db-2228636a793efit",
+          "source": "bea30044-d539-4458-b922-f8bda6750c59",
+          "sourceHandle": "output",
+          "target": "e02c2a6e-5744-42ec-80db-2228636a793e",
+          "targetHandle": "fit",
+          "data": {
+            "startColor": "#D770AD",
+            "stopColor": "#FFB300"
+          },
+          "selected": false,
+          "dragging": false,
+          "__class__": "Edge"
+        },
+        {
+          "id": "reactflow__edge-bef8853b-4d93-4674-8186-73bdd3e6cb12output-5d989bf1-7f58-49d8-9fc2-dcdf21eb5fdedelete",
+          "source": "bef8853b-4d93-4674-8186-73bdd3e6cb12",
+          "sourceHandle": "output",
+          "target": "5d989bf1-7f58-49d8-9fc2-dcdf21eb5fde",
+          "targetHandle": "delete",
+          "data": {
+            "startColor": "#D770AD",
+            "stopColor": "#888"
+          },
+          "selected": false,
+          "dragging": false,
+          "__class__": "Edge"
+        },
+        {
+          "id": "reactflow__edge-e5ead383-59fd-4491-bb41-dcbbbd14e540predict-e68b2b65-c3c6-425d-9864-c5c897e4ab56input",
+          "source": "e5ead383-59fd-4491-bb41-dcbbbd14e540",
+          "sourceHandle": "predict",
+          "target": "e68b2b65-c3c6-425d-9864-c5c897e4ab56",
+          "targetHandle": "input",
+          "data": {
+            "startColor": "#FFB300",
+            "stopColor": "#56A6DC"
+          },
+          "selected": false,
+          "dragging": false,
+          "__class__": "Edge"
+        },
+        {
+          "id": "reactflow__edge-b464ec26-a264-4575-a335-f1676eb8175boutput-45fa0a1d-755f-4460-bcb0-348ec5834294input",
+          "source": "b464ec26-a264-4575-a335-f1676eb8175b",
+          "sourceHandle": "output",
+          "target": "45fa0a1d-755f-4460-bcb0-348ec5834294",
+          "targetHandle": "input",
+          "data": {
+            "startColor": "#56A6DC",
+            "stopColor": "#D770AD"
+          },
+          "selected": false,
+          "dragging": false,
+          "__class__": "Edge"
+        },
+        {
+          "id": "reactflow__edge-45fa0a1d-755f-4460-bcb0-348ec5834294output-e5ead383-59fd-4491-bb41-dcbbbd14e540predict",
+          "source": "45fa0a1d-755f-4460-bcb0-348ec5834294",
+          "sourceHandle": "output",
+          "target": "e5ead383-59fd-4491-bb41-dcbbbd14e540",
+          "targetHandle": "predict",
+          "data": {
+            "startColor": "#D770AD",
+            "stopColor": "#FFB300"
+          },
+          "selected": false,
+          "dragging": false,
+          "__class__": "Edge"
+        },
+        {
+          "id": "reactflow__edge-3ead0746-3285-4cba-8fa9-f6961360037aoutput-aa496623-3d8b-408c-b731-2b41b645246ainput",
+          "source": "3ead0746-3285-4cba-8fa9-f6961360037a",
+          "sourceHandle": "output",
+          "target": "aa496623-3d8b-408c-b731-2b41b645246a",
+          "targetHandle": "input",
+          "data": {
+            "startColor": "#D770AD",
+            "stopColor": "#56A6DC"
+          },
+          "selected": false,
+          "dragging": false,
+          "__class__": "Edge"
+        },
+        {
+          "id": "reactflow__edge-ffd9c8ee-39c6-4a45-b5a5-26728e085672output-5d989bf1-7f58-49d8-9fc2-dcdf21eb5fdelist",
+          "source": "ffd9c8ee-39c6-4a45-b5a5-26728e085672",
+          "sourceHandle": "output",
+          "target": "5d989bf1-7f58-49d8-9fc2-dcdf21eb5fde",
+          "targetHandle": "list",
+          "data": {
+            "startColor": "#D770AD",
+            "stopColor": "#888"
+          },
+          "selected": false,
+          "dragging": false,
+          "__class__": "Edge"
+        }
+      ],
+      "__class__": "Graph"
+    }
+  },
+  "open": [
+    "main"
+  ],
+  "active": "main",
+  "version": "1.0.0",
+  "__class__": "Project"
+}
