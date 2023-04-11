@@ -49,8 +49,9 @@ The email_clf is an AutoML classifier (i.e. it automatically chose the best mode
 of the emails given in input to predict the associated labels.
 
 The **MongoDB** component reads data from the *email* collection, **Selector** component selects only *label* and *text* fields 
-and finally **Predictor** component fits the *email_clf* predictor using field *label* as the target. Ones the model is 
-fitted, you can open the Predictors tab and visualize the generated report:
+and finally **Predictor** component fits the *email_clf* predictor using field *label* as the target. 
+
+Ones the model is fitted, you can open the Predictors tab and visualize the generated report:
 
 <p align="center"><img src="https://user-images.githubusercontent.com/30443495/231119629-34da1b3f-347a-4fde-953e-df4a6a23be79.gif" width="80%" /></p>
 
@@ -61,7 +62,8 @@ Finally, you can expose a service to obtain the email predictions.
 <p align="center"><img src="https://user-images.githubusercontent.com/30443495/230631548-aa1ef38c-d75c-4e3a-8bfd-b44a4011cd08.png" width="80%" /></p>
 
 The **Route** component exposes a service named *predict*, you can copy the url (i.e. http://localhost:9999/routes/orchestrator/endpoints/text_classification_from_mongo/predict)
-and test it. 
+and test it:
+
 ```commandline
 curl -d "\"prova di un testo email\"" -X POST http://localhost:9999/routes/orchestrator/endpoints/text_classification_from_mongo/predict
 ```
