@@ -61,15 +61,18 @@ Finally, you can expose a service to obtain the email predictions.
 
 <p align="center"><img src="https://user-images.githubusercontent.com/30443495/230631548-aa1ef38c-d75c-4e3a-8bfd-b44a4011cd08.png" width="80%" /></p>
 
-The **Route** component exposes a service named *predict*, you can copy the url (i.e. http://localhost:9999/routes/orchestrator/endpoints/text_classification_from_mongo/predict)
-and test it:
+Use **Route** and **Response** components at the beginning and at the end of the flow producing the output. In the 
+**Route** configuration name the service *predict* and copy the complete url (i.e. http://localhost:9999/routes/orchestrator/endpoints/text_classification_from_mongo/predict).
+In the **Response** component set the *Response Type* to json.
+
+The **Function** component extracts the body from the received request and returns it to the **Predictor** component 
+which predicts the output.
+
+You can test it using:
 
 ```commandline
 curl -d "\"prova di un testo email\"" -X POST http://localhost:9999/routes/orchestrator/endpoints/text_classification_from_mongo/predict
 ```
-
-The **Function** component extracts the body from the received request and returns it to the **Predictor** component 
-which predicts the output.
 
 ### STEP4: Test service
 

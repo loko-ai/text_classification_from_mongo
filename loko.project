@@ -3,7 +3,7 @@
   "id": "text_classification_from_mongo",
   "description": "",
   "created_on": "06/04/2023, 09:56:42",
-  "last_modify": "11/04/2023, 09:40:18",
+  "last_modify": "11/04/2023, 14:31:14",
   "graphs": {
     "main": {
       "nodes": [
