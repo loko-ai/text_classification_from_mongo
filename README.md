@@ -4,20 +4,25 @@
 A simple example of training/predicting a text classification model using the **Predictor** and **MongoDB** component.
 
 From the **Projects** tab, click on **Import from git** and copy and paste the URL of the current page 
-(i.e. https://github.com/loko-ai/text_classification_from_mongo_demo):
+(i.e. https://github.com/loko-ai/text_classification_from_mongo):
 <p align="center"><img src="https://user-images.githubusercontent.com/30443495/230620716-c67e5e58-b71e-4817-9213-39a7e0e9cddd.gif" width="80%" /></p>
 
 
 ### STEP1: Mongo ingestion
 
-From the **Applications** tab install and run the **mongo_extension** (See more here https://github.com/loko-ai/mongo_extension).
+From the **Applications** tab install and run the **mongo_extension** (See more here https://github.com/loko-ai/mongo_extension):
+
+<p align="center"><img src="https://user-images.githubusercontent.com/30443495/231104965-72a41b3a-c566-48f3-8ba2-ad668fd6ff5d.gif" width="80%" /></p>
 
 You can then go back to your project and run it. 
 
-In order to start the project remember to press the **play** button on the right of the project's name.
-<p align="center"><img src="https://user-images.githubusercontent.com/30443495/230619982-29889ac5-b7a8-439e-afc9-851623426179.png" width="80%" /></p>
+In order to start the project remember to press the **play** button on the right of the project's name:
+
+<p align="center"><img src="https://user-images.githubusercontent.com/30443495/231104375-fa1040ff-5b98-4ea3-9068-c523791d9e13.gif" width="60%" /></p>
 
 The first flow use the **CSV Reader** component to read the *email_dataset.csv* and save records to a MongoDB collection named *email*.
+
+<p align="center"><img src="https://user-images.githubusercontent.com/30443495/230619982-29889ac5-b7a8-439e-afc9-851623426179.png" width="80%" /></p>
 
 In order to check if you correctly saved your data, you can run the second **Trigger** component, named *List*.
 
@@ -26,25 +31,28 @@ In order to check if you correctly saved your data, you can run the second **Tri
 The expected output shows that you have a collection named email containing 1000 records. Otherwise, you can delete data
 using the last flow and ingest again your dataset.
 
-You can also visualize the collection content using the **db manager** GUI from the Applications tab.
+You can also visualize the collection content using the **db manager** GUI from the Applications tab:
 
-<p align="center"><img src="https://user-images.githubusercontent.com/30443495/230626093-6aafa47c-b083-4207-a935-58a7d017be11.png" width="80%" /></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/30443495/231112479-fb5a9be4-9500-4bbf-ad4e-74b4c89c1c01.gif" width="80%" /></p>
 
 ### STEP2: Model training
 
 Now you have to create a new predictor from the **Predictors** tab using an auto model and auto transformer: 
 
-<p align="center"><img src="https://user-images.githubusercontent.com/30443495/230627319-619ec8ef-b622-4e20-bd5b-ed48978477e9.png" width="80%" /></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/30443495/231115254-63503369-2f11-41e8-8451-b7e2e22308ee.gif" width="80%" /></p>
 
-You can go back to the project and fit the emal_clf model:
+You can go back to the project and fit the email_clf model:
 
 <p align="center"><img src="https://user-images.githubusercontent.com/30443495/230628094-643e9bee-c454-4eb6-b70a-effc6b0a2a7d.png" width="80%" /></p>
+
+The email_clf is an AutoML classifier (i.e. it automatically chose the best model and hyperparameters) which uses the text
+of the emails given in input to predict the associated labels.
 
 The **MongoDB** component reads data from the *email* collection, **Selector** component selects only *label* and *text* fields 
 and finally **Predictor** component fits the *email_clf* predictor using field *label* as the target. Ones the model is 
 fitted, you can open the Predictors tab and visualize the generated report:
 
-<p align="center"><img src="https://user-images.githubusercontent.com/30443495/230629884-defcf850-40d9-4284-8801-23b40fcfb225.png" width="80%" /></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/30443495/231119629-34da1b3f-347a-4fde-953e-df4a6a23be79.gif" width="80%" /></p>
 
 ### STEP3: Expose service
 
@@ -52,8 +60,13 @@ Finally, you can expose a service to obtain the email predictions.
 
 <p align="center"><img src="https://user-images.githubusercontent.com/30443495/230631548-aa1ef38c-d75c-4e3a-8bfd-b44a4011cd08.png" width="80%" /></p>
 
-The **Route** component exposes a service named *predict*, you can copy the url (i.e. http://localhost:9999/routes/orchestrator/endpoints/text_classification_from_mongo_demo/predict)
-and test it. The **Function** component extracts the body from the received request and returns it to the **Predictor** component 
+The **Route** component exposes a service named *predict*, you can copy the url (i.e. http://localhost:9999/routes/orchestrator/endpoints/text_classification_from_mongo/predict)
+and test it. 
+```commandline
+curl -d "\"prova di un testo email\"" -X POST http://localhost:9999/routes/orchestrator/endpoints/text_classification_from_mongo/predict
+```
+
+The **Function** component extracts the body from the received request and returns it to the **Predictor** component 
 which predicts the output.
 
 ### STEP4: Test service
@@ -62,4 +75,4 @@ You can test the *predict* service directly in your flow using the **HTTP Reques
 
 <p align="center"><img src="https://user-images.githubusercontent.com/30443495/230633240-800dffa3-b1da-4cad-b926-87fa90800222.png" width="80%" /></p>
 
-In this case you have change http://localhost:9999 to http://gateway:8080 since the request will be executed in one of the containers inside the *loko* network (i.e. http://gateway:8080/routes/orchestrator/endpoints/text_classification_from_mongo_demo/predict). 
+In this case you have change http://localhost:9999 to http://gateway:8080 since the request will be executed in one of the containers inside the *loko* network (i.e. http://gateway:8080/routes/orchestrator/endpoints/text_classification_from_mongo/predict). 

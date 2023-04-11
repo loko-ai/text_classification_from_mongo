@@ -1,9 +1,9 @@
 {
-  "name": "text_classification_from_mongo_demo",
-  "id": "text_classification_from_mongo_demo",
+  "name": "text_classification_from_mongo",
+  "id": "text_classification_from_mongo",
   "description": "",
   "created_on": "06/04/2023, 09:56:42",
-  "last_modify": "07/04/2023, 15:22:16",
+  "last_modify": "11/04/2023, 09:40:18",
   "graphs": {
     "main": {
       "nodes": [
@@ -99,8 +99,8 @@
                 "propagate": true,
                 "value": {
                   "name": "email_dataset.csv",
-                  "path": "data/projects/text_classification_from_mongo_demo/data/email_dataset.csv",
-                  "parent": "data/projects/text_classification_from_mongo_demo/data",
+                  "path": "data/projects/text_classification_from_mongo/data/email_dataset.csv",
+                  "parent": "data/projects/text_classification_from_mongo/data",
                   "isDir": false,
                   "hidden": false
                 }
@@ -1529,7 +1529,7 @@
                 "comment": "",
                 "alias": "",
                 "debug": true,
-                "url": "http://gateway:8080/routes/orchestrator/endpoints/text_classification_from_mongo_demo/predict",
+                "url": "http://gateway:8080/routes/orchestrator/endpoints/text_classification_from_mongo/predict",
                 "method": "POST",
                 "accept": "json"
               }
@@ -1725,7 +1725,7 @@
                 "alias": "",
                 "debug": false,
                 "type": "String",
-                "value": "prova di un testo di email"
+                "value": "prova di un testo email"
               }
             },
             "locked": null
