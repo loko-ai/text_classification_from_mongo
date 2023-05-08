@@ -12,7 +12,7 @@ From the **Projects** tab, click on **Import from git** and copy and paste the U
 
 From the **Applications** tab install and run the **mongo_extension** (See more here https://github.com/loko-ai/mongo_extension):
 
-<p align="center"><img src="https://user-images.githubusercontent.com/30443495/231104965-72a41b3a-c566-48f3-8ba2-ad668fd6ff5d.gif" width="80%" /></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/30443495/236760265-d25d26ca-8484-4b3a-ba5a-df30300cede3.gif" width="80%" /></p>
 
 You can then go back to your project and run it. 
 
@@ -33,13 +33,13 @@ using the last flow and ingest again your dataset.
 
 You can also visualize the collection content using the **db manager** GUI from the Applications tab:
 
-<p align="center"><img src="https://user-images.githubusercontent.com/30443495/231112479-fb5a9be4-9500-4bbf-ad4e-74b4c89c1c01.gif" width="80%" /></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/30443495/236760289-40a50da4-5960-4574-8655-1711bb5f3c82.gif" width="80%" /></p>
 
 ### STEP2: Model training
 
 Now you have to create a new predictor from the **Predictors** tab using an auto model and auto transformer: 
 
-<p align="center"><img src="https://user-images.githubusercontent.com/30443495/231115254-63503369-2f11-41e8-8451-b7e2e22308ee.gif" width="80%" /></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/30443495/236760307-a1e57481-77c2-4634-a94a-8e54f824b841.gif" width="80%" /></p>
 
 You can go back to the project and fit the email_clf model:
 
@@ -53,7 +53,7 @@ and finally **Predictor** component fits the *email_clf* predictor using field *
 
 Ones the model is fitted, you can open the Predictors tab and visualize the generated report:
 
-<p align="center"><img src="https://user-images.githubusercontent.com/30443495/231119629-34da1b3f-347a-4fde-953e-df4a6a23be79.gif" width="80%" /></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/30443495/236760331-045534a0-56d0-46dc-aa3a-38d4c3f6a76a.gif" width="80%" /></p>
 
 ### STEP3: Expose service
 
